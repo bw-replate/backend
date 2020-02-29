@@ -5,6 +5,7 @@ const helmet = require("helmet");
 const authenticate = require("../auth/authenticate-middleware.js");
 const authRouter = require("../auth/auth-router.js");
 const accessRouter = require("../access/access-router");
+const volunteerRouter = require("../volunteer/volunteer-router");
 const pickupRequestRouter = require("../pickupRequest/pickupRequest-router");
 
 const server = express();
@@ -16,5 +17,6 @@ server.use(express.json());
 server.use("/api/auth", authRouter);
 server.use("/api/access", authenticate, accessRouter);
 server.use("/api/pickupRequest", authenticate, pickupRequestRouter);
+server.use("/api/volunteer", authenticate, volunteerRouter);
 
 module.exports = server;
