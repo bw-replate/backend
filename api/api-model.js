@@ -4,7 +4,8 @@ module.exports = {
   add,
   find,
   findBy,
-  findByName
+  findByName,
+  updateUser
 };
 
 function add(user) {
@@ -26,4 +27,21 @@ function findBy(filter) {
 
 function find() {
   return db("users").select("username");
+}
+
+function updateUser(updates, username) {
+  return db("users")
+    .where({ username })
+    .first()
+    .then(details => {
+      const upd = { ...details, ...updates };
+      const { username, phoneNumber } = upd;
+      return { username, phoneNumber };
+    })
+    .then(ret =>
+      db("users")
+        .update(ret, "username")
+        .where({ username })
+        .then(uname => uname[0] === ret.username && ret)
+    );
 }
