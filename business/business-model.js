@@ -4,7 +4,8 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  updateById
 };
 
 function add(business) {
@@ -12,13 +13,29 @@ function add(business) {
 }
 
 function findById(id) {
-  return db("business")
+  return db
+    .select(
+      "business.name as name",
+      "business.address as address",
+      "business.phoneNumber as phoneNumber"
+    )
+    .from("business")
     .where({ id })
     .first();
 }
 
 function findBy(filter) {
-  return db("business").where(filter);
+  return db
+    .select(
+      "business.id as id",
+      "business.name as name",
+      "business.address as address",
+      "business.phoneNumber as phoneNumber",
+      "users.username as username"
+    )
+    .from("business")
+    .innerJoin("users", "user_id", "users.id")
+    .where(filter);
 }
 
 function find() {
@@ -32,4 +49,10 @@ function find() {
     )
     .from("business")
     .innerJoin("users", "user_id", "users.id");
+}
+
+function updateById(updates, id) {
+  return db("business")
+    .update(updates)
+    .where({ id });
 }
