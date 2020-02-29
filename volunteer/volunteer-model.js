@@ -22,5 +22,15 @@ function findBy(filter) {
 }
 
 function find() {
-  return db("volunteer");
+  return db
+    .select(
+      "volunteer.id as id",
+      "users.username as username",
+      "users.phoneNumber as phoneNumber",
+      "access.role as role",
+      "access.description as role_description"
+    )
+    .from("volunteer")
+    .innerJoin("users", "user_id", "users.id")
+    .innerJoin("access", "access_id", "access.id");
 }

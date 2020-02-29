@@ -22,5 +22,14 @@ function findBy(filter) {
 }
 
 function find() {
-  return db("business");
+  return db
+    .select(
+      "business.id as id",
+      "business.name as name",
+      "business.address as address",
+      "business.phoneNumber as phoneNumber",
+      "users.username as username"
+    )
+    .from("business")
+    .innerJoin("users", "user_id", "users.id");
 }
