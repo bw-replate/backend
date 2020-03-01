@@ -1,4 +1,5 @@
-const db = require("../database/dbConfig");
+// const db = require("../database/dbConfig");
+const db = require("../database/connection.js");
 const users = require("../api/api-model");
 
 module.exports = {
