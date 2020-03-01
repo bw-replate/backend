@@ -5,4 +5,8 @@ router.get("/", (req, res) => {
   res.status(200).json({ router: "pickupRequest" });
 });
 
+router.post("/", (req, res) => {
+  // create a new picup request.
+});
+
 module.exports = router;
