@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const business = require("./business-model");
 const users = require("../api/api-model");
+const ownBusiness = require("./business-owner");
 
 router.get("/", (req, res) => {
   // returns a list of businesses and the username associated with it
@@ -30,12 +31,16 @@ router.get("/:id", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  business
-    .updateById(req.body, req.params.id)
-    .then(v => {
-      res.status(200).json(v);
-    })
-    .catch(errors => res.status(500).json(errors));
+  business.findById(req.params.id).then(biz => {
+    ownBusiness(req.headers.authorization, biz)
+      ? business
+          .updateById(req.body, req.params.id)
+          .then(v => res.status(200).json(v))
+          .catch(errors => res.status(500).json(errors))
+      : res.status(403).json({
+          error: "Mind your own business; This one is owned by someone else."
+        });
+  });
 });
 
 module.exports = router;

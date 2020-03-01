@@ -6,7 +6,8 @@ module.exports = {
   findBy,
   findByName,
   updateUser,
-  getUserId
+  getUserId,
+  getUserDetails
 };
 
 function add(user) {
@@ -16,6 +17,12 @@ function add(user) {
 function findByName(username) {
   return db("users")
     .select("username", "phoneNumber")
+    .where({ username })
+    .first();
+}
+
+function getUserDetails(username) {
+  return db("users")
     .where({ username })
     .first();
 }

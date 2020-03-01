@@ -33,20 +33,23 @@ router.post(
   "/login",
   (req, res) =>
     (req.body.username &&
+      req.body.username.length > 0 &&
       req.body.password &&
       api
-        .findBy({ username: req.body.username })
-        .first()
-        .then(user =>
-          user && bcrypt.compareSync(req.body.password, user.password)
+        .getUserDetails(req.body.username)
+        .then(u => {
+          const uname = req.body.username;
+          const upw = req.body.password;
+          console.log(upw, uname, "|", u);
+          u && bcrypt.compareSync(upw, u.password)
             ? res.status(200).json({
-                message: `Welcome ${user.username}`,
-                token: generateToken(user)
+                message: `Welcome ${uname}`,
+                token: generateToken(u)
               })
             : res.status(418).json({
                 message: "I'm a little teapot"
-              })
-        )
+              });
+        })
         .catch(({ name, code, message, stack }) =>
           res.status(500).json({ name, code, message, stack })
         )) ||
