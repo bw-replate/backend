@@ -13,13 +13,7 @@ function add(business) {
 }
 
 function findById(id) {
-  return db
-    .select(
-      "business.name as name",
-      "business.address as address",
-      "business.phoneNumber as phoneNumber"
-    )
-    .from("business")
+  return db("business")
     .where({ id })
     .first();
 }

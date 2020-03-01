@@ -3,7 +3,9 @@ exports.up = function(knex) {
     tbl.increments();
     tbl.string("type", 255).notNullable();
     tbl.string("amount", 255).notNullable();
-    tbl.datetime("preferredPickupTime").notNullable();
+    tbl
+      .datetime("preferredPickupTime", { precision: 6 })
+      .defaultTo(knex.fn.now(6));
     tbl
       .integer("business_id")
       .unsigned()
