@@ -6,11 +6,18 @@ module.exports = {
   find,
   findBy,
   findById,
-  updateById
+  updateById,
+  remove
 };
 
 function add(business) {
   return db("business").insert(business, "id");
+}
+
+function remove(id) {
+  return db("business")
+    .del()
+    .where({ id });
 }
 
 function findById(id) {
