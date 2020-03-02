@@ -43,4 +43,12 @@ router.put("/:id", (req, res) => {
   });
 });
 
+router.delete("/:id", (req, res) => {
+  business.findById(req.params.id).then(biz => {
+    business
+      .remove(req.params.id)
+      .then(() => res.status(200).json({ removed: biz }));
+  });
+});
+
 module.exports = router;
