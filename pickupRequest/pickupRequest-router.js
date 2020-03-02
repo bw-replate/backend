@@ -42,4 +42,12 @@ router.put("/:id", (req, res) => {
     .catch(errors => res.status(500).json(errors));
 });
 
+router.delete("/:id", (req, res) => {
+  pickupRequest.findById(req.params.id).then(pur => {
+    pickupRequest
+      .remove(req.params.id)
+      .then(() => res.status(200).json({ removed: pur }));
+    // res.status(200).json(pur); // return pickup requrest
+  });
+});
 module.exports = router;

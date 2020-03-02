@@ -40,7 +40,7 @@ router.post(
         .then(u => {
           const uname = req.body.username;
           const upw = req.body.password;
-          console.log(upw, uname, "|", u);
+          // console.log(upw, uname, "|", u);
           u && bcrypt.compareSync(upw, u.password)
             ? res.status(200).json({
                 message: `Welcome ${uname}`,

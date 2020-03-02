@@ -6,11 +6,18 @@ module.exports = {
   find,
   findBy,
   findById,
-  updateById
+  updateById,
+  remove
 };
 
 function add(pickupRequest) {
   return db("pickupRequest").insert(pickupRequest, "id");
+}
+
+function remove(id) {
+  return db("pickupRequest")
+    .del()
+    .where({ id });
 }
 
 function findById(id) {

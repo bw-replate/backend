@@ -11,7 +11,7 @@ router.get("/", (req, res) => {
 
 router.put("/:username", (req, res) => {
   // update user
-  console.log("put");
+  // console.log("put");
   usersModel
     .updateUser(req.body, req.params.username)
     .then(updated => res.status(200).json(updated))
