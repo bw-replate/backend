@@ -3,6 +3,12 @@ const business = require("./business-model");
 const users = require("../api/api-model");
 const ownBusiness = require("./business-owner");
 
+/**
+ * @api {get} /business Get all business profiles
+ * @apiName Business
+ * @apiGroup Business
+ */
+
 router.get("/", (req, res) => {
   // returns a list of businesses and the username associated with it
   business
@@ -10,6 +16,12 @@ router.get("/", (req, res) => {
     .then(lst => res.status(200).send(lst))
     .catch(error => res.status(500).send(error));
 });
+
+/**
+ * @api {post} /business Create a new business profile
+ * @apiName CreateBusiness
+ * @apiGroup Business
+ */
 
 router.post("/", (req, res) => {
   // create a new business profile
@@ -26,9 +38,21 @@ router.post("/", (req, res) => {
         .send({ error: "{name, address, phoneNumber, username} required" });
 });
 
+/**
+ * @api {get} /business/:id Get a single business profile
+ * @apiName GetBusiness
+ * @apiGroup Business
+ */
+
 router.get("/:id", (req, res) => {
   business.findById(req.params.id).then(result => res.status(200).json(result));
 });
+
+/**
+ * @api {put} /business/:id Update a single business profile
+ * @apiName UpdateBusiness
+ * @apiGroup Business
+ */
 
 router.put("/:id", (req, res) => {
   business.findById(req.params.id).then(biz => {
@@ -42,6 +66,11 @@ router.put("/:id", (req, res) => {
         });
   });
 });
+/**
+ * @api {delete} /business/:id Delete a single business profile
+ * @apiName DeleteBusiness
+ * @apiGroup Business
+ */
 
 router.delete("/:id", (req, res) => {
   business.findById(req.params.id).then(biz => {

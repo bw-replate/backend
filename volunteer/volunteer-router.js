@@ -2,6 +2,11 @@ const router = require("express").Router();
 const volunteer = require("./volunteer-model");
 const users = require("../api/api-model");
 
+/**
+ * @api {get} /volunteer Get all Volunteer profiles
+ * @apiName GetVolunteers
+ * @apiGroup Volunteer
+ */
 router.get("/", (req, res) => {
   // todo
   volunteer
@@ -9,6 +14,12 @@ router.get("/", (req, res) => {
     .then(lst => res.status(200).send(lst))
     .catch(error => res.status(500).send(error));
 });
+
+/**
+ * @api {post} /volunteer Create a new Volunteer profile
+ * @apiName CreateVolunteer
+ * @apiGroup Volunteer
+ */
 
 router.post("/", (req, res) => {
   // create volunteer
@@ -25,6 +36,12 @@ router.post("/", (req, res) => {
     });
 });
 
+/**
+ * @api {get} /volunteer/:username get Volunteer profiles for username
+ * @apiName CreateVolunteer
+ * @apiGroup Volunteer
+ */
+
 router.get("/:username", (req, res) => {
   // list what username is volunteering for
   volunteer
@@ -34,6 +51,12 @@ router.get("/:username", (req, res) => {
     })
     .catch(errors => res.status(500).json(errors));
 });
+
+/**
+ * @api {put} /volunteer/:username Update Volunteer profiles for username
+ * @apiName UpdateVolunteers
+ * @apiGroup Volunteer
+ */
 
 router.put("/:username", (req, res) => {
   // update access for username across the board
@@ -45,6 +68,12 @@ router.put("/:username", (req, res) => {
     .catch(errors => res.status(500).json(errors));
 });
 
+/**
+ * @api {put} /volunteer/:id Update a single Volunteer profile
+ * @apiName UpdateVolunteerWithId
+ * @apiGroup Volunteer
+ */
+
 router.put("/id/:id", (req, res) => {
   // update volunteer (not the user)
   volunteer.findById(req.params.id).then(v => {
@@ -53,6 +82,12 @@ router.put("/id/:id", (req, res) => {
       .then(updatedV => res.status(200).json(updatedV));
   });
 });
+
+/**
+ * @api {delete} /volunteer/:id Delete a single Volunteer profile
+ * @apiName DeleteVolunteer
+ * @apiGroup Volunteer
+ */
 
 router.delete("/id/:id", (req, res) => {
   // remove volunteer (not the user)

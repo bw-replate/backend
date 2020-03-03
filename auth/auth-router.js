@@ -7,7 +7,11 @@ const secrets = require("../server/secrets");
 router.get("/", (req, res) => {
   res.status(200).send("Replate");
 });
-
+/**
+ * @api {post} /register Register a new User
+ * @apiName Register
+ * @apiGroup Users
+ */
 router.post(
   "/register",
   (req, res) =>
@@ -28,6 +32,12 @@ router.post(
         )) ||
     res.status(400).json({ message: "username and password required." })
 );
+
+/**
+ * @api {post} /login Login User
+ * @apiName Login
+ * @apiGroup Users
+ */
 
 router.post(
   "/login",
