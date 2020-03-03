@@ -4,6 +4,7 @@
   "description": "Replate API",
   "main": "index.js",
   "scripts": {
+    "doc": "apidoc -i . -e '(node_modules|public)' -o public / apidoc",
     "start": "node index.js",
     "server": "nodemon",
     "test": "jest --watch"
