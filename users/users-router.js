@@ -2,8 +2,12 @@ const usersModel = require("../api/api-model");
 const router = require("express").Router();
 const isCurrentUser = require("./is-current-user");
 
+/**
+ * @api {get} /users List all Usernames
+ * @apiName GetUsers
+ * @apiGroup Users
+ */
 router.get("/", (req, res) => {
-  // list all users
   usersModel
     .find()
     .then(lst => res.status(200).send(lst))
