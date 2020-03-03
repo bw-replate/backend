@@ -1,12 +1,24 @@
 const router = require("express").Router();
 const pickupRequest = require("./pickupRequest-model");
 
+/**
+ * @api {get} /pickupRequest Get a list of Pickup Requests
+ * @apiName GetPickupRequests
+ * @apiGroup pickupRequests
+ */
+
 router.get("/", (req, res) => {
   pickupRequest
     .find()
     .then(pur => res.status(200).json(pur))
     .catch(error => res.status(500).json({ error }));
 });
+
+/**
+ * @api {post} /pickupRequest create a new Pickup Requests
+ * @apiName CreatePickupRequest
+ * @apiGroup pickupRequests
+ */
 
 router.post("/", (req, res) => {
   // create a new pickup request.
@@ -20,6 +32,12 @@ router.post("/", (req, res) => {
         .status(418)
         .send({ error: "{name, address, phoneNumber, username} required" });
 });
+
+/**
+ * @api {get} /pickupRequest/:id Get a single Pickup Request
+ * @apiName GetPickupRequest
+ * @apiGroup pickupRequests
+ */
 
 router.get("/:id", (req, res) => {
   pickupRequest
@@ -35,12 +53,24 @@ router.get("/:id", (req, res) => {
     );
 });
 
+/**
+ * @api {put} /pickupRequest/:id Update a single Pickup Request
+ * @apiName UpdatePickupRequest
+ * @apiGroup pickupRequests
+ */
+
 router.put("/:id", (req, res) => {
   pickupRequest
     .updateById(req.body, req.params.id)
     .then(v => res.status(200).json(v))
     .catch(errors => res.status(500).json(errors));
 });
+
+/**
+ * @api {delete} /pickupRequest/:id Delete a single Pickup Request
+ * @apiName DeletePickupRequest
+ * @apiGroup pickupRequests
+ */
 
 router.delete("/:id", (req, res) => {
   pickupRequest.findById(req.params.id).then(pur => {
