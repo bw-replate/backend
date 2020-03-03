@@ -3,7 +3,7 @@ const router = require("express").Router();
 const isCurrentUser = require("./is-current-user");
 
 /**
- * @api {get} /users List all Usernames
+ * @api {get} /users Get Users
  * @apiName GetUsers
  * @apiGroup Users
  */
@@ -14,9 +14,12 @@ router.get("/", (req, res) => {
     .catch(error => res.status(500).send(error));
 });
 
+/**
+ * @api {put} /users/:username Update User
+ * @apiName PutUsers
+ * @apiGroup Users
+ */
 router.put("/:username", (req, res) => {
-  // update user
-  // console.log("put");
   usersModel
     .updateUser(req.body, req.params.username)
     .then(updated => res.status(200).json(updated))
@@ -24,6 +27,12 @@ router.put("/:username", (req, res) => {
       res.status(500).json({ name, code, message, stack })
     );
 });
+
+/**
+ * @api {get} /users/:username Get User
+ * @apiName GetUserName
+ * @apiGroup Users
+ */
 
 router.get("/:username", (req, res) => {
   usersModel
@@ -36,6 +45,11 @@ router.get("/:username", (req, res) => {
     .catch(error => res.status(500).send(error));
 });
 
+/**
+ * @api {delete} /users/:username Del User
+ * @apiName DelUserName
+ * @apiGroup Users
+ */
 router.delete("/:id", (req, res) => {
   if (isCurrentUser(req.headers.authorization, req.params.id)) {
     res.status(200).json({ message: "please don't delete yourself" });
