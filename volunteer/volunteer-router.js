@@ -16,7 +16,7 @@ router.post("/", (req, res) => {
   username &&
     access_id &&
     users.getUserId(username).then(u => {
-      u.id
+      u && u.id
         ? volunteer
             .add({ access_id, user_id: u.id })
             .then(ok => res.status(200).json(ok))
@@ -26,6 +26,7 @@ router.post("/", (req, res) => {
 });
 
 router.get("/:username", (req, res) => {
+  // list what username is volunteering for
   volunteer
     .findByName(req.params.username)
     .then(v => {
@@ -35,12 +36,31 @@ router.get("/:username", (req, res) => {
 });
 
 router.put("/:username", (req, res) => {
+  // update access for username across the board
   volunteer
     .updateByName(req.body.access_id, req.params.username)
     .then(v => {
       res.status(200).json(v);
     })
     .catch(errors => res.status(500).json(errors));
+});
+
+router.put("/id/:id", (req, res) => {
+  // update volunteer (not the user)
+  volunteer.findById(req.params.id).then(v => {
+    volunteer
+      .updateById(req.body, req.params.id)
+      .then(updatedV => res.status(200).json(updatedV));
+  });
+});
+
+router.delete("/id/:id", (req, res) => {
+  // remove volunteer (not the user)
+  volunteer.findById(req.params.id).then(v => {
+    volunteer
+      .remove(req.params.id)
+      .then(() => res.status(200).json({ removed: v }));
+  });
 });
 
 module.exports = router;

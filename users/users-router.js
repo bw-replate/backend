@@ -1,5 +1,6 @@
 const usersModel = require("../api/api-model");
 const router = require("express").Router();
+const isCurrentUser = require("./is-current-user");
 
 router.get("/", (req, res) => {
   // list all users
@@ -29,6 +30,15 @@ router.get("/:username", (req, res) => {
         : res.status(404).json({ error: `cannot find ${req.params.username}` });
     })
     .catch(error => res.status(500).send(error));
+});
+
+router.delete("/:id", (req, res) => {
+  if (isCurrentUser(req.headers.authorization, req.params.id)) {
+    res.status(200).json({ message: "please don't delete yourself" });
+  } else {
+    // TODO : superuser specification
+    res.status(200).json({ message: "your superpowers had no effect" });
+  }
 });
 
 module.exports = router;

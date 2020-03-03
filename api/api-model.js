@@ -8,11 +8,18 @@ module.exports = {
   findByName,
   updateUser,
   getUserId,
-  getUserDetails
+  getUserDetails,
+  remove
 };
 
 function add(user) {
   return db("users").insert(user, "id");
+}
+
+function remove(id) {
+  return db("users")
+    .del()
+    .where({ id });
 }
 
 function findByName(username) {

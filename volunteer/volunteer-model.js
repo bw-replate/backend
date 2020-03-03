@@ -9,11 +9,18 @@ module.exports = {
   findById,
   findByName,
   updateById,
-  updateByName
+  updateByName,
+  remove
 };
 
 function add(newVolunteer) {
   return db("volunteer").insert(newVolunteer, "user_id");
+}
+
+function remove(id) {
+  return db("volunteer")
+    .del()
+    .where({ id });
 }
 
 function updateByName(access_id, username) {
@@ -26,6 +33,7 @@ function updateByName(access_id, username) {
 }
 
 function updateById(updates, volunteer_id) {
+  console.log(updates);
   return db("volunteer")
     .update(updates)
     .where({ id: volunteer_id });
