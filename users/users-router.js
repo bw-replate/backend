@@ -6,7 +6,44 @@ const isCurrentUser = require("./is-current-user");
  * @api {get} /users Get Users
  * @apiName GetUsers
  * @apiGroup Users
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * [
+ *  {
+ *    "username": "toni"
+ *  },
+ *  {
+ *    "username": "fuston05@yahoo.com"
+ *  },
+ *  {
+ *    "username": "fuston05"
+ *  },
+ *  {
+ *    "username": "stacey"
+ *  },
+ *  {
+ *    "username": "bill"
+ *  },
+ *  {
+ *    "username": "Lambda"
+ *  },
+ *  {
+ *    "username": "asdsd"
+ *  },
+ *  {
+ *    "username": "kjbkjb"
+ *  },
+ *  {
+ *    "username": "xczczx"
+ *  },
+ *  {
+ *    "username": "adam"
+ *  }
+ * ]
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
  */
+
 router.get("/", (req, res) => {
   usersModel
     .find()
@@ -15,37 +52,17 @@ router.get("/", (req, res) => {
 });
 
 /**
- * @api {put} /users/:username Update User
- * @apiName PutUsers
+ * @api {get} /users/:username Get User
+ * @apiName GetUser
  * @apiGroup Users
- * @apiParam {String} phoneNumber User phoneNumber
- * @apiParamExample {json} Body
- * {
- *  "phoneNumber": "555-272-1111"
- * }
+ * @apiParam {String} username username
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200
  * {
- *  "username": "stacey",
- *  "phoneNumber": "555-272-1111"
+ *    "username": "stacey"
  * }
- * @apiErrorExample {json} Update error
+ * @apiErrorExample {json} Error
  *    HTTP/1.1 500 Internal Server Error
- */
-
-router.put("/:username", (req, res) => {
-  usersModel
-    .updateUser(req.body, req.params.username)
-    .then(updated => res.status(200).json(updated))
-    .catch(({ name, code, message, stack }) =>
-      res.status(500).json({ name, code, message, stack })
-    );
-});
-
-/**
- * @api {get} /users/:username Get User
- * @apiName GetUserName
- * @apiGroup Users
  */
 
 router.get("/:username", (req, res) => {
@@ -57,6 +74,15 @@ router.get("/:username", (req, res) => {
         : res.status(404).json({ error: `cannot find ${req.params.username}` });
     })
     .catch(error => res.status(500).send(error));
+});
+
+router.put("/:username", (req, res) => {
+  usersModel
+    .updateUser(req.body, req.params.username)
+    .then(updated => res.status(200).json(updated))
+    .catch(({ name, code, message, stack }) =>
+      res.status(500).json({ name, code, message, stack })
+    );
 });
 
 /**

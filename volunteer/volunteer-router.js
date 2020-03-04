@@ -6,6 +6,19 @@ const users = require("../api/api-model");
  * @api {get} /volunteer Get all Volunteer profiles
  * @apiName GetVolunteers
  * @apiGroup Volunteer
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * [
+ *  {
+ *    "id": 4,
+ *    "username": "stacey",
+ *    "phoneNumber": "555-432-1234",
+ *    "role": "business",
+ *    "role_description": "may create/read/update/delete pickup requests"
+ *  }
+ * ]
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
  */
 router.get("/", (req, res) => {
   // todo
@@ -19,8 +32,21 @@ router.get("/", (req, res) => {
  * @api {post} /volunteer Create a new Volunteer profile
  * @apiName CreateVolunteer
  * @apiGroup Volunteer
+ * @apiParam {String} username username
+ * @apiParam {Integer} access_id id of relevant access record.
+ * @apiParamExample {json} Body
+ * {
+ *  "username": "stacey22",
+ *  "access_id": 1
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201
+ * [
+ *  2
+ * ]
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
-
 router.post("/", (req, res) => {
   // create volunteer
   const { username, access_id } = req.body;
@@ -37,9 +63,24 @@ router.post("/", (req, res) => {
 });
 
 /**
+ */
+/**
  * @api {get} /volunteer/:username get Volunteer profiles for username
  * @apiName CreateVolunteer
  * @apiGroup Volunteer
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * [
+ *  {
+ *    "id": 4,
+ *    "username": "stacey",
+ *    "phoneNumber": "555-432-1234",
+ *    "role": "business",
+ *    "role_description": "may create/read/update/delete pickup requests"
+ *  }
+ * ]
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.get("/:username", (req, res) => {
@@ -53,9 +94,15 @@ router.get("/:username", (req, res) => {
 });
 
 /**
- * @api {put} /volunteer/:username Update Volunteer profiles for username
+ * @api {put} /volunteer/:username Update all Volunteer profiles for username
  * @apiName UpdateVolunteers
  * @apiGroup Volunteer
+ * @apiParam {String} username username associated with Volunteer profile(s).
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * 1
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.put("/:username", (req, res) => {
@@ -72,6 +119,18 @@ router.put("/:username", (req, res) => {
  * @api {put} /volunteer/:id Update a single Volunteer profile
  * @apiName UpdateVolunteerWithId
  * @apiGroup Volunteer
+ * @apiParam {Integer} id id of Volunteer to Update.
+ * @apiParamExample {json} Body
+ * {
+ *  "access_id": 2
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * {
+ * "access_id": 2
+ * }
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.put("/id/:id", (req, res) => {
@@ -87,6 +146,18 @@ router.put("/id/:id", (req, res) => {
  * @api {delete} /volunteer/:id Delete a single Volunteer profile
  * @apiName DeleteVolunteer
  * @apiGroup Volunteer
+ * @apiParam {Integer} id id of Volunteer to DELETE.
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * {
+ *  "removed": {
+ *    "id": 5,
+ *    "user_id": 2,
+ *    "access_id": 1
+ *  }
+ * }
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.delete("/id/:id", (req, res) => {
