@@ -85,6 +85,51 @@
     "title": "Login User",
     "name": "Login",
     "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>User password</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n   \"username\": \"stacey\",\n   \"password\": \"replate\",\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 201\n{\n  \"message\": \"Welcome stacey\",\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InN0YWNleSIsImlhdCI6MTU4MzI3NzU5NCwiZXhwIjoxNTgzMzYzOTk0fQ.sO2rgh6hT8x_FjXBDqImhQB3XmThKklwhFGwUBt1voc\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./auth/auth-router.js",
     "groupTitle": "Users"
@@ -95,6 +140,44 @@
     "title": "Update User",
     "name": "PutUsers",
     "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phoneNumber",
+            "description": "<p>User phoneNumber</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"phoneNumber\": \"555-272-1111\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n \"username\": \"stacey\",\n \"phoneNumber\": \"555-272-1111\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./users/users-router.js",
     "groupTitle": "Users"
@@ -102,9 +185,61 @@
   {
     "type": "post",
     "url": "/register",
-    "title": "Register a new User",
+    "title": "Register a new account",
     "name": "Register",
     "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>choose a unique username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>choose a password</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phoneNumber",
+            "description": "<p>prefer mobile so you can be reached enroute</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"username\": \"stacey\",\n \"password\": \"replate\",\n \"phoneNumber\": \"555-432-1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 201\n{\n\"username\": \"stacey2\",\n\"phoneNumber\": \"555-432-1234\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./auth/auth-router.js",
     "groupTitle": "Users"
