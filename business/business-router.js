@@ -7,8 +7,27 @@ const ownBusiness = require("./business-owner");
  * @api {get} /business Get all business profiles
  * @apiName Business
  * @apiGroup Business
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * [
+ *  {
+ *  "id": 1,
+ *  "name": "Stay fresh market",
+ *  "address": "227 Spring lane",
+ *  "phoneNumber": "555-4332",
+ *  "username": "stacey"
+ *  },
+ *  {
+ *  "id": 6,
+ *  "name": "Stay fresh market 2",
+ *  "address": "227 Spring lane",
+ *  "phoneNumber": "555-1234",
+ *  "username": "stacey"
+ *  }
+ * ]
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
-
 router.get("/", (req, res) => {
   // returns a list of businesses and the username associated with it
   business
@@ -21,6 +40,24 @@ router.get("/", (req, res) => {
  * @api {post} /business Create a new business profile
  * @apiName CreateBusiness
  * @apiGroup Business
+ * @apiParam {String} name Business name
+ * @apiParam {String} address Business address
+ * @apiParam {String} phoneNumber Business phone number
+ * @apiParam {String} username Business owner username
+ * @apiParamExample {json} Body
+ * {
+ *  "name":"Stay fresh market",
+ *  "address":"227 Spring lane",
+ *  "phoneNumber":"555-1234",
+ *  "username":"stacey"
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201
+ * [
+ *  6
+ * ]
+ * @apiErrorExample {json} Registration error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.post("/", (req, res) => {
@@ -42,6 +79,18 @@ router.post("/", (req, res) => {
  * @api {get} /business/:id Get a single business profile
  * @apiName GetBusiness
  * @apiGroup Business
+ * @apiParam {integer} id id of the Business profile
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * {
+ * "id": 1,
+ * "name": "Stay fresh market",
+ * "address": "227 Spring lane",
+ * "phoneNumber": "555-4332",
+ * "user_id": 2
+ * }
+ * @apiErrorExample {json} Request error
+ * HTTP/1.1 500 Internal Server Error
  */
 
 router.get("/:id", (req, res) => {
@@ -52,6 +101,18 @@ router.get("/:id", (req, res) => {
  * @api {put} /business/:id Update a single business profile
  * @apiName UpdateBusiness
  * @apiGroup Business
+ * @apiParam {integer} id id of the Business profile-to-be-updated
+ * @apiParamExample {json} Body
+ * {
+ * "address": "1111 Pleasant Ave",
+ * "phoneNumber": "555-1212",
+ * "user_id": 2
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * 1
+ * @apiErrorExample {json} Update error
+ * HTTP/1.1 500 Internal Server Error
  */
 
 router.put("/:id", (req, res) => {
@@ -70,6 +131,20 @@ router.put("/:id", (req, res) => {
  * @api {delete} /business/:id Delete a single business profile
  * @apiName DeleteBusiness
  * @apiGroup Business
+ * @apiParam {integer} id id of the Business profile to-be-deleted
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * {
+ *  "removed": {
+ *  "id": 6,
+ *  "name": "Stay fresh market 2",
+ *  "address": "227 Spring lane",
+ *  "phoneNumber": "555-1234",
+ *  "user_id": 2
+ *  }
+ * }
+ * @apiErrorExample {json} Delete error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.delete("/:id", (req, res) => {

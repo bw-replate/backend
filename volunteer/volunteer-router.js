@@ -44,7 +44,7 @@ router.get("/", (req, res) => {
  * [
  *  2
  * ]
- * @apiErrorExample {json} Registration error
+ * @apiErrorExample {json} Error
  *    HTTP/1.1 500 Internal Server Error
  */
 router.post("/", (req, res) => {
@@ -98,10 +98,14 @@ router.get("/:username", (req, res) => {
  * @apiName UpdateVolunteers
  * @apiGroup Volunteer
  * @apiParam {String} username username associated with Volunteer profile(s).
+ * @apiParamExample {json} Body
+ * {
+ *  "access_id": 2
+ * }
  * @apiSuccessExample {json} Success
  * HTTP/1.1 200
  * 1
- * @apiErrorExample {json} Registration error
+ * @apiErrorExample {json}  error
  *    HTTP/1.1 500 Internal Server Error
  */
 
@@ -129,7 +133,7 @@ router.put("/:username", (req, res) => {
  * {
  * "access_id": 2
  * }
- * @apiErrorExample {json} Registration error
+ * @apiErrorExample {json} Error
  *    HTTP/1.1 500 Internal Server Error
  */
 
@@ -156,7 +160,7 @@ router.put("/id/:id", (req, res) => {
  *    "access_id": 1
  *  }
  * }
- * @apiErrorExample {json} Registration error
+ * @apiErrorExample {json} Error
  *    HTTP/1.1 500 Internal Server Error
  */
 
