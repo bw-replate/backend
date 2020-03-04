@@ -5,6 +5,24 @@
     "title": "Get all business profiles",
     "name": "Business",
     "group": "Business",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n[\n {\n \"id\": 1,\n \"name\": \"Stay fresh market\",\n \"address\": \"227 Spring lane\",\n \"phoneNumber\": \"555-4332\",\n \"username\": \"stacey\"\n },\n {\n \"id\": 6,\n \"name\": \"Stay fresh market 2\",\n \"address\": \"227 Spring lane\",\n \"phoneNumber\": \"555-1234\",\n \"username\": \"stacey\"\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./business/business-router.js",
     "groupTitle": "Business"
@@ -15,6 +33,65 @@
     "title": "Create a new business profile",
     "name": "CreateBusiness",
     "group": "Business",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Business name</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "address",
+            "description": "<p>Business address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "phoneNumber",
+            "description": "<p>Business phone number</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>Business owner username</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"name\":\"Stay fresh market\",\n \"address\":\"227 Spring lane\",\n \"phoneNumber\":\"555-1234\",\n \"username\":\"stacey\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 201\n[\n 6\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./business/business-router.js",
     "groupTitle": "Business"
@@ -25,6 +102,37 @@
     "title": "Delete a single business profile",
     "name": "DeleteBusiness",
     "group": "Business",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of the Business profile to-be-deleted</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n \"removed\": {\n \"id\": 6,\n \"name\": \"Stay fresh market 2\",\n \"address\": \"227 Spring lane\",\n \"phoneNumber\": \"555-1234\",\n \"user_id\": 2\n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Delete error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./business/business-router.js",
     "groupTitle": "Business"
@@ -35,6 +143,37 @@
     "title": "Get a single business profile",
     "name": "GetBusiness",
     "group": "Business",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of the Business profile</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n\"id\": 1,\n\"name\": \"Stay fresh market\",\n\"address\": \"227 Spring lane\",\n\"phoneNumber\": \"555-4332\",\n\"user_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Request error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./business/business-router.js",
     "groupTitle": "Business"
@@ -45,6 +184,44 @@
     "title": "Update a single business profile",
     "name": "UpdateBusiness",
     "group": "Business",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of the Business profile-to-be-updated</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n\"address\": \"1111 Pleasant Ave\",\n\"phoneNumber\": \"555-1212\",\n\"user_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n1",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Update error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./business/business-router.js",
     "groupTitle": "Business"
@@ -290,7 +467,7 @@
     "error": {
       "examples": [
         {
-          "title": "Registration error",
+          "title": "Error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
@@ -359,7 +536,7 @@
     "error": {
       "examples": [
         {
-          "title": "Registration error",
+          "title": "Error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
@@ -435,7 +612,7 @@
     "error": {
       "examples": [
         {
-          "title": "Registration error",
+          "title": "Error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
@@ -462,7 +639,14 @@
             "description": "<p>username associated with Volunteer profile(s).</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"access_id\": 2\n}",
+          "type": "json"
+        }
+      ]
     },
     "success": {
       "examples": [
@@ -476,7 +660,7 @@
     "error": {
       "examples": [
         {
-          "title": "Registration error",
+          "title": "error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
