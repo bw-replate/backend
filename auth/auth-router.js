@@ -7,11 +7,30 @@ const secrets = require("../server/secrets");
 router.get("/", (req, res) => {
   res.status(200).send("Replate");
 });
+
 /**
- * @api {post} /register Register a new User
+ * @api {post} /register Register a new account
  * @apiName Register
  * @apiGroup Users
+ * @apiParam {String} username choose a unique username
+ * @apiParam {String} password choose a password
+ * @apiParam {String} phoneNumber prefer mobile so you can be reached enroute
+ * @apiParamExample {json} Body
+ * {
+ *  "username": "stacey",
+ *  "password": "replate",
+ *  "phoneNumber": "555-432-1234"
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201
+ * {
+ * "username": "stacey2",
+ * "phoneNumber": "555-432-1234"
+ * }
+ * @apiErrorExample {json} Update error
+ *    HTTP/1.1 500 Internal Server Error
  */
+
 router.post(
   "/register",
   (req, res) =>
@@ -37,6 +56,21 @@ router.post(
  * @api {post} /login Login User
  * @apiName Login
  * @apiGroup Users
+ * @apiParam {String} username User username
+ * @apiParam {String} password User password
+ * @apiParamExample {json} Body
+ * {
+ *    "username": "stacey",
+ *    "password": "replate",
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201
+ * {
+ *   "message": "Welcome stacey",
+ *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InN0YWNleSIsImlhdCI6MTU4MzI3NzU5NCwiZXhwIjoxNTgzMzYzOTk0fQ.sO2rgh6hT8x_FjXBDqImhQB3XmThKklwhFGwUBt1voc"
+ * }
+ * @apiErrorExample {json} Update error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.post(

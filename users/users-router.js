@@ -18,7 +18,21 @@ router.get("/", (req, res) => {
  * @api {put} /users/:username Update User
  * @apiName PutUsers
  * @apiGroup Users
+ * @apiParam {String} phoneNumber User phoneNumber
+ * @apiParamExample {json} Body
+ * {
+ *  "phoneNumber": "555-272-1111"
+ * }
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * {
+ *  "username": "stacey",
+ *  "phoneNumber": "555-272-1111"
+ * }
+ * @apiErrorExample {json} Update error
+ *    HTTP/1.1 500 Internal Server Error
  */
+
 router.put("/:username", (req, res) => {
   usersModel
     .updateUser(req.body, req.params.username)
