@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
  * "username": "stacey2",
  * "phoneNumber": "555-432-1234"
  * }
- * @apiErrorExample {json} Update error
+ * @apiErrorExample {json} Registration error
  *    HTTP/1.1 500 Internal Server Error
  */
 
@@ -69,7 +69,7 @@ router.post(
  *   "message": "Welcome stacey",
  *   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWJqZWN0IjoxLCJ1c2VybmFtZSI6InN0YWNleSIsImlhdCI6MTU4MzI3NzU5NCwiZXhwIjoxNTgzMzYzOTk0fQ.sO2rgh6hT8x_FjXBDqImhQB3XmThKklwhFGwUBt1voc"
  * }
- * @apiErrorExample {json} Update error
+ * @apiErrorExample {json} Login error
  *    HTTP/1.1 500 Internal Server Error
  */
 

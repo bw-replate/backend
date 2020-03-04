@@ -63,8 +63,39 @@
     "type": "get",
     "url": "/users/:username",
     "title": "Get User",
-    "name": "GetUserName",
+    "name": "GetUser",
     "group": "Users",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>username</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n   \"username\": \"stacey\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./users/users-router.js",
     "groupTitle": "Users"
@@ -75,6 +106,24 @@
     "title": "Get Users",
     "name": "GetUsers",
     "group": "Users",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n[\n {\n   \"username\": \"toni\"\n },\n {\n   \"username\": \"fuston05@yahoo.com\"\n },\n {\n   \"username\": \"fuston05\"\n },\n {\n   \"username\": \"stacey\"\n },\n {\n   \"username\": \"bill\"\n },\n {\n   \"username\": \"Lambda\"\n },\n {\n   \"username\": \"asdsd\"\n },\n {\n   \"username\": \"kjbkjb\"\n },\n {\n   \"username\": \"xczczx\"\n },\n {\n   \"username\": \"adam\"\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./users/users-router.js",
     "groupTitle": "Users"
@@ -124,7 +173,7 @@
     "error": {
       "examples": [
         {
-          "title": "Update error",
+          "title": "Login error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
@@ -132,54 +181,6 @@
     },
     "version": "0.0.0",
     "filename": "./auth/auth-router.js",
-    "groupTitle": "Users"
-  },
-  {
-    "type": "put",
-    "url": "/users/:username",
-    "title": "Update User",
-    "name": "PutUsers",
-    "group": "Users",
-    "parameter": {
-      "fields": {
-        "Parameter": [
-          {
-            "group": "Parameter",
-            "type": "String",
-            "optional": false,
-            "field": "phoneNumber",
-            "description": "<p>User phoneNumber</p>"
-          }
-        ]
-      },
-      "examples": [
-        {
-          "title": "Body",
-          "content": "{\n \"phoneNumber\": \"555-272-1111\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "success": {
-      "examples": [
-        {
-          "title": "Success",
-          "content": "HTTP/1.1 200\n{\n \"username\": \"stacey\",\n \"phoneNumber\": \"555-272-1111\"\n}",
-          "type": "json"
-        }
-      ]
-    },
-    "error": {
-      "examples": [
-        {
-          "title": "Update error",
-          "content": "HTTP/1.1 500 Internal Server Error",
-          "type": "json"
-        }
-      ]
-    },
-    "version": "0.0.0",
-    "filename": "./users/users-router.js",
     "groupTitle": "Users"
   },
   {
@@ -234,7 +235,7 @@
     "error": {
       "examples": [
         {
-          "title": "Update error",
+          "title": "Registration error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
@@ -250,6 +251,51 @@
     "title": "Create a new Volunteer profile",
     "name": "CreateVolunteer",
     "group": "Volunteer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>username</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "access_id",
+            "description": "<p>id of relevant access record.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"username\": \"stacey22\",\n \"access_id\": 1\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 201\n[\n 2\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
@@ -260,6 +306,24 @@
     "title": "get Volunteer profiles for username",
     "name": "CreateVolunteer",
     "group": "Volunteer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n[\n {\n   \"id\": 4,\n   \"username\": \"stacey\",\n   \"phoneNumber\": \"555-432-1234\",\n   \"role\": \"business\",\n   \"role_description\": \"may create/read/update/delete pickup requests\"\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
@@ -270,6 +334,37 @@
     "title": "Delete a single Volunteer profile",
     "name": "DeleteVolunteer",
     "group": "Volunteer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of Volunteer to DELETE.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n \"removed\": {\n   \"id\": 5,\n   \"user_id\": 2,\n   \"access_id\": 1\n }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
@@ -280,6 +375,24 @@
     "title": "Get all Volunteer profiles",
     "name": "GetVolunteers",
     "group": "Volunteer",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n[\n {\n   \"id\": 4,\n   \"username\": \"stacey\",\n   \"phoneNumber\": \"555-432-1234\",\n   \"role\": \"business\",\n   \"role_description\": \"may create/read/update/delete pickup requests\"\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
@@ -290,6 +403,44 @@
     "title": "Update a single Volunteer profile",
     "name": "UpdateVolunteerWithId",
     "group": "Volunteer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of Volunteer to Update.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n \"access_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n\"access_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
@@ -297,9 +448,40 @@
   {
     "type": "put",
     "url": "/volunteer/:username",
-    "title": "Update Volunteer profiles for username",
+    "title": "Update all Volunteer profiles for username",
     "name": "UpdateVolunteers",
     "group": "Volunteer",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>username associated with Volunteer profile(s).</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n1",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Registration error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./volunteer/volunteer-router.js",
     "groupTitle": "Volunteer"
