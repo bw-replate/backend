@@ -696,6 +696,37 @@
     "title": "Get a single Pickup Request",
     "name": "GetPickupRequest",
     "group": "pickupRequests",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of Pickup Request</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "{\n \"id\": 2,\n \"type\": \"cheeses\",\n \"amount\": \"1 lb\",\n \"preferredPickupTime\": \"2020-03-01T20:19:02.371Z\",\n \"business_id\": 1,\n \"status\": \"pending\",\n \"volunteer_id\": null\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./pickupRequest/pickupRequest-router.js",
     "groupTitle": "pickupRequests"
@@ -706,6 +737,24 @@
     "title": "Get a list of Pickup Requests",
     "name": "GetPickupRequests",
     "group": "pickupRequests",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "[\n {\n   \"id\": 2,\n   \"type\": \"cheeses\",\n   \"amount\": \"1 lb\",\n   \"preferredPickupTime\": \"2020-03-01T20:19:02.371Z\",\n   \"business_id\": 1,\n   \"status\": \"pending\",\n   \"volunteer_id\": null\n },\n {\n   \"id\": 3,\n   \"type\": \"hearts of romaine lettuce\",\n   \"amount\": \"36\",\n   \"preferredPickupTime\": \"2020-03-05T03:35:10.344Z\",\n   \"business_id\": 1,\n   \"status\": \"pending\",\n   \"volunteer_id\": null\n }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
     "version": "0.0.0",
     "filename": "./pickupRequest/pickupRequest-router.js",
     "groupTitle": "pickupRequests"

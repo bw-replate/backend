@@ -5,6 +5,29 @@ const pickupRequest = require("./pickupRequest-model");
  * @api {get} /pickupRequest Get a list of Pickup Requests
  * @apiName GetPickupRequests
  * @apiGroup pickupRequests
+ * @apiSuccessExample {json} Success
+ * [
+ *  {
+ *    "id": 2,
+ *    "type": "cheeses",
+ *    "amount": "1 lb",
+ *    "preferredPickupTime": "2020-03-01T20:19:02.371Z",
+ *    "business_id": 1,
+ *    "status": "pending",
+ *    "volunteer_id": null
+ *  },
+ *  {
+ *    "id": 3,
+ *    "type": "hearts of romaine lettuce",
+ *    "amount": "36",
+ *    "preferredPickupTime": "2020-03-05T03:35:10.344Z",
+ *    "business_id": 1,
+ *    "status": "pending",
+ *    "volunteer_id": null
+ *  }
+ * ]
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.get("/", (req, res) => {
@@ -37,6 +60,19 @@ router.post("/", (req, res) => {
  * @api {get} /pickupRequest/:id Get a single Pickup Request
  * @apiName GetPickupRequest
  * @apiGroup pickupRequests
+ * @apiParam {integer} id id of Pickup Request
+ * @apiSuccessExample {json} Success
+ * {
+ *  "id": 2,
+ *  "type": "cheeses",
+ *  "amount": "1 lb",
+ *  "preferredPickupTime": "2020-03-01T20:19:02.371Z",
+ *  "business_id": 1,
+ *  "status": "pending",
+ *  "volunteer_id": null
+ * }
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
  */
 
 router.get("/:id", (req, res) => {
