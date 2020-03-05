@@ -56,7 +56,7 @@ router.post("/", (req, res) => {
       u && u.id
         ? volunteer
             .add({ access_id, user_id: u.id })
-            .then(ok => res.status(200).json(ok))
+            .then(ok => res.status(201).json(ok))
             .catch(error => res.status(500).json(error))
         : res.status(404).json({ error: `cannot find ${username} id` });
     });

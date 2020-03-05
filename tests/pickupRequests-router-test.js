@@ -10,6 +10,23 @@ module.exports = () =>
       expect(testToken.tokens.length > 0);
     });
 
+    describe("POST /api/pickupRequest", function() {
+      it("should return an 201 when creating a new pickupRequest", done => {
+        return request(server)
+          .post("/api/pickupRequest")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({
+            type: `mixed bag; sell by ${Date.now()}`,
+            amount: "12",
+            preferredPickupTime: Date.now(),
+            business_id: 1
+          })
+          .expect("Content-Type", /json/)
+          .expect(201, done);
+      });
+    });
+
     describe("GET /api/pickupRequest", function() {
       it("should return 401 Unauthorized, without a valid token.", function() {
         return request(server)

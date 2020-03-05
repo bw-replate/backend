@@ -67,7 +67,7 @@ router.post("/", (req, res) => {
     ? users.getUserId(username).then(({ id: user_id }) =>
         business
           .add({ name, address, phoneNumber, user_id })
-          .then(result => res.status(200).send(result))
+          .then(result => res.status(201).send(result))
           .catch(error => res.status(500).send(error))
       )
     : res

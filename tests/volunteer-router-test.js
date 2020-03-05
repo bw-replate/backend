@@ -10,6 +10,21 @@ module.exports = () =>
       expect(testToken.tokens.length > 0);
     });
 
+    describe("POST /api/volunteer", function() {
+      it("should return an 201 when creating a volunteer profile", done => {
+        return request(server)
+          .post("/api/volunteer")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({
+            username: testToken.username,
+            access_id: 1
+          })
+          .expect("Content-Type", /json/)
+          .expect(201, done);
+      });
+    });
+
     describe("GET /api/volunteer", function() {
       it("should return 401 Unauthorized, without a valid token.", function() {
         return request(server)
