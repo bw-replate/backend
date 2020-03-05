@@ -7,7 +7,7 @@ module.exports = () => {
   const testPassword = "testReplate";
   const testPhoneNumber = "555-432-1234";
 
-  describe("001: Authoriziation", function() {
+  describe("000: Authoriziation", function() {
     it("GET login should return 404", function() {
       return request(server)
         .get("/api/auth/login")

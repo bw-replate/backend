@@ -1,6 +1,14 @@
-/* 
-  a singleton to store token(s) in memory while running multiple tests
-*/
+/* the keymaster singleton 
+  // ... first test user login
+  const keymaster = require("./keymaster").getInstance(); // IMPORT KEYMASTER
+  // ... once logged in successfully,
+  keymaster.tokens.push(token);  // PUSH TOKEN TO KEYMASTER
+
+  // ... elsewhere in other test.spec
+  const keymaster = require("./keymaster").getInstance(); // IMPORT KEYMASTER
+  const myToken = keymaster.tokens[0]; // ACCESS the token that was stored
+
+  */
 
 var KeyRing = (function() {
   var instance;
