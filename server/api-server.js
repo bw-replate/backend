@@ -3,7 +3,10 @@ const cors = require("cors");
 const helmet = require("helmet");
 const server = express();
 const router = require("../api/api-router");
-
+const tokenStore = require("../tests/keymaster").getInstance();
+tokenStore.new = false;
+tokenStore.title = "testing";
+// console.log(tokenStore);
 server.use(helmet());
 server.use(cors());
 server.use(express.json());
