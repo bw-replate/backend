@@ -1,5 +1,5 @@
 /* 
-  a singleton to store token(s) in memory 
+  a singleton to store token(s) in memory while running multiple tests
 */
 
 var KeyRing = (function() {

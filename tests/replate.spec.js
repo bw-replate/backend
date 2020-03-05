@@ -1,3 +1,3 @@
-const TestSuites = require("./index.js");
+const TestReplateAPI = require("./index.js");
 
-TestSuites();
+TestReplateAPI();

@@ -1,22 +1,56 @@
 const tokenStore = require("./keymaster");
+const request = require("supertest");
+const server = require("../server/api-server");
 
 module.exports = () =>
-  describe("business router", function() {
+  describe("002: Business", function() {
     let testToken = tokenStore.getInstance();
 
     it("puts the token on it's skin", function() {
       expect(testToken.tokens.length > 0);
-      // return request(server)
-      //   .post("/api/auth/login")
-      //   .send({ username: testUsername, password: testPassword })
-      //   .set("Accept", "application/json")
-      //   .expect("Content-Type", /json/)
-      //   .then(res => {
-      //     token = res.body.token || false;
-      //     token && testToken.tokens.push(token);
-      //     console.log(testToken);
-      //     expect(res.status).toBe(200);
-      //     expect(testToken[0]);
-      //   });
+    });
+
+    describe("GET /api/business", function() {
+      it("should return 401 Unauthorized, without a valid token.", function() {
+        return request(server)
+          .get("/api/business")
+          .then(res => {
+            expect(res.status).toBe(401);
+          });
+      });
+    });
+
+    describe("GET /api/business", function() {
+      it("should return 200 OK with valid token", function() {
+        return request(server)
+          .get("/api/business")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .then(res => {
+            expect(res.status).toBe(200);
+          });
+      });
+
+      it("should return JSON formatted body", function() {
+        return request(server)
+          .get("/api/business")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .then(res => {
+            expect(res.type).toMatch(/json/);
+          });
+      });
+
+      it("should return an array type object", function() {
+        return request(server)
+          .get("/api/business")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .then(res => {
+            const a = Object.getPrototypeOf(Array());
+            const b = Object.getPrototypeOf(res.body);
+            expect(a === b).toBe(true);
+          });
+      });
     });
   });
