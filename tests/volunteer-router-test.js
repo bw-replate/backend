@@ -11,6 +11,20 @@ module.exports = () =>
     });
 
     describe("POST /api/volunteer", function() {
+      it("should return an 401 when Unauthorized to create a volunteer profile", done => {
+        return request(server)
+          .post("/api/volunteer")
+          .set("Accept", "application/json")
+          .send({
+            username: testToken.username,
+            access_id: 1
+          })
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("POST /api/volunteer", function() {
       it("should return an 201 when creating a volunteer profile", done => {
         return request(server)
           .post("/api/volunteer")
