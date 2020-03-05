@@ -11,6 +11,22 @@ module.exports = () =>
     });
 
     describe("POST /api/business", function() {
+      it("should return an 401 when unAuthorized to create Business", done => {
+        return request(server)
+          .post("/api/business")
+          .set("Accept", "application/json")
+          .send({
+            name: `McBusiness ${Date.now()}`,
+            address: "5555 Burgerland place",
+            phoneNumber: "555-1234",
+            username: testToken.username
+          })
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("POST /api/business", function() {
       it("should return an 201 when creating a business profile", done => {
         return request(server)
           .post("/api/business")
@@ -22,8 +38,12 @@ module.exports = () =>
             phoneNumber: "555-1234",
             username: testToken.username
           })
-          .expect("Content-Type", /json/)
-          .expect(201, done);
+          .then(res => {
+            const [newBiz_id] = res.body;
+            testToken.biz = newBiz_id;
+            expect(res.status).toBe(201);
+            done();
+          });
       });
     });
 
@@ -68,6 +88,57 @@ module.exports = () =>
             const b = Object.getPrototypeOf(res.body);
             expect(a === b).toBe(true);
           });
+      });
+    });
+
+    describe("PUT /api/business/:id", function() {
+      it("should return an 401 without authorized token when updating business profile", done => {
+        return request(server)
+          .put(`/api/business/${testToken.biz}`)
+          .set("Accept", "application/json")
+          .send({
+            address: "1234 Nice place"
+          })
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("PUT /api/business/:id", function() {
+      it("should return an 200 when updating business profile", done => {
+        return request(server)
+          .put(`/api/business/${testToken.biz}`)
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({
+            address: "1234 Nice place"
+          })
+          .expect("Content-Type", /json/)
+          .expect(200, done);
+      });
+    });
+
+    describe("DELETE /api/business/:id", function() {
+      it("should return 401 without authorized token when trying to DELETE a business profile", done => {
+        return (
+          request(server)
+            .delete(`/api/business/${testToken.biz}`)
+            // .set("Authorization", testToken.tokens[0])
+            .set("Accept", "application/json")
+            .expect("Content-Type", /json/)
+            .expect(401, done)
+        );
+      });
+    });
+
+    describe("DELETE /api/business/:id", function() {
+      it("should return 200 when authorized to DELETE a business profile", done => {
+        return request(server)
+          .delete(`/api/business/${testToken.biz}`)
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(200, done);
       });
     });
   });

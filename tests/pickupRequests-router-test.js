@@ -11,6 +11,22 @@ module.exports = () =>
     });
 
     describe("POST /api/pickupRequest", function() {
+      it("should return an 401 when Unauthorized to create a new pickupRequest", done => {
+        return request(server)
+          .post("/api/pickupRequest")
+          .set("Accept", "application/json")
+          .send({
+            type: `mixed bag; sell by ${Date.now()}`,
+            amount: "12",
+            preferredPickupTime: Date.now(),
+            business_id: 1
+          })
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("POST /api/pickupRequest", function() {
       it("should return an 201 when creating a new pickupRequest", done => {
         return request(server)
           .post("/api/pickupRequest")
