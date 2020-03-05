@@ -7,7 +7,7 @@
     "doc": "apidoc -i . -e '(node_modules|public)' -o public / apidoc",
     "start": "node index.js",
     "server": "nodemon",
-    "test": "jest --watch"
+    "test": "jest --watch --runInBand"
   },
   "repository": {
     "type": "git",
