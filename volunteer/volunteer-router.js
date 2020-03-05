@@ -55,15 +55,13 @@ router.post("/", (req, res) => {
     users.getUserId(username).then(u => {
       u && u.id
         ? volunteer
-            .add({ access_id, user_id: u.id })
+            .addThenReturn({ access_id, user_id: u.id }, "id")
             .then(ok => res.status(201).json(ok))
             .catch(error => res.status(500).json(error))
         : res.status(404).json({ error: `cannot find ${username} id` });
     });
 });
 
-/**
- */
 /**
  * @api {get} /volunteer/:username get Volunteer profiles for username
  * @apiName CreateVolunteer

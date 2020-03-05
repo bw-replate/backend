@@ -10,11 +10,16 @@ module.exports = {
   findByName,
   updateById,
   updateByName,
-  remove
+  remove,
+  addThenReturn
 };
 
 function add(newVolunteer) {
   return db("volunteer").insert(newVolunteer, "user_id");
+}
+
+function addThenReturn(newVolunteer, returnField) {
+  return db("volunteer").insert(newVolunteer, returnField);
 }
 
 function remove(id) {

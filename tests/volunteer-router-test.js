@@ -34,8 +34,11 @@ module.exports = () =>
             username: testToken.username,
             access_id: 1
           })
-          .expect("Content-Type", /json/)
-          .expect(201, done);
+          .then(res => {
+            testToken.vol = res.body[0];
+            expect(res.status).toBe(201);
+          })
+          .then(done());
       });
     });
 
@@ -80,6 +83,27 @@ module.exports = () =>
             const b = Object.getPrototypeOf(res.body);
             expect(a === b).toBe(true);
           });
+      });
+    });
+
+    describe("DELETE /api/volunteer/id/:id", function() {
+      it("should return 401 without authorized token when trying to DELETE a volunteer profile", done => {
+        return request(server)
+          .delete(`/api/volunteer/id/${testToken.vol}`)
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("DELETE /api/volunteer/id/:id", function() {
+      it("should return 200 when authorized to DELETE a volunteer profile", done => {
+        return request(server)
+          .delete(`/api/volunteer/id/${testToken.vol}`)
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .expect("Content-Type", /json/)
+          .expect(200, done);
       });
     });
   });
