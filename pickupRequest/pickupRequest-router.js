@@ -60,7 +60,7 @@ router.post("/", (req, res) => {
   purType && amount && business_id
     ? pickupRequest
         .add({ type: purType, amount, business_id })
-        .then(result => res.status(200).send(result))
+        .then(result => res.status(201).send(result))
         .catch(error => res.status(500).send(error))
     : res
         .status(418)

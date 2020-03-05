@@ -6,6 +6,7 @@ module.exports = () => {
   const testUsername = `user${Date.now()}test`;
   const testPassword = "testReplate";
   const testPhoneNumber = "555-432-1234";
+  tokenStore.username = testUsername;
 
   describe("000: Authoriziation", function() {
     it("GET login should return 404", function() {

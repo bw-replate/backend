@@ -16,7 +16,7 @@ var KeyRing = (function() {
     var object = new Object({
       title: "I am the key master",
       tokens: [],
-      new: true
+      username: ""
     });
     return object;
   }

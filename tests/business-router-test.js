@@ -10,6 +10,23 @@ module.exports = () =>
       expect(testToken.tokens.length > 0);
     });
 
+    describe("POST /api/business", function() {
+      it("should return an 201 when creating a business profile", done => {
+        return request(server)
+          .post("/api/business")
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({
+            name: `McBusiness ${Date.now()}`,
+            address: "5555 Burgerland place",
+            phoneNumber: "555-1234",
+            username: testToken.username
+          })
+          .expect("Content-Type", /json/)
+          .expect(201, done);
+      });
+    });
+
     describe("GET /api/business", function() {
       it("should return 401 Unauthorized, without a valid token.", function() {
         return request(server)
