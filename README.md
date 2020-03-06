@@ -6,8 +6,10 @@
 
 ![Tests](/public/jestTested.png)
 
+### developed with open source software
+
 <div style="width:50px">
 
-![Tux](/public/Tux.png) ![Gnome](/public/Gnomelogo.png)
+![Tux](/public/Tux.png)
 
 </div>
