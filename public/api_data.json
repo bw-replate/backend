@@ -1,5 +1,87 @@
 [
   {
+    "type": "delete",
+    "url": "/access/:id",
+    "title": "Delete a single access profile",
+    "name": "DeleteAccess",
+    "group": "Access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "integer",
+            "optional": false,
+            "field": "id",
+            "description": "<p>id of the access profile to-be-deleted</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200\n{\n \"removed\": {\n   \"id\": 1234,\n   \"role\": \"one eye one horn flying purple people eater\",\n   \"description\": \"sure looked strange to me\",\n   \"permissions\": \"none\"\n   }\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Delete error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./access/access-router.js",
+    "groupTitle": "Access"
+  },
+  {
+    "type": "put",
+    "url": "/access/:id",
+    "title": "Update a single access profile",
+    "name": "UpdateAccess",
+    "group": "Access",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object",
+            "optional": false,
+            "field": "updates",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./access/access-router.js",
+    "groupTitle": "Access"
+  },
+  {
     "type": "get",
     "url": "/business",
     "title": "Get all business profiles",
