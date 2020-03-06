@@ -38,8 +38,14 @@ module.exports = () =>
             preferredPickupTime: Date.now(),
             business_id: 1
           })
-          .expect("Content-Type", /json/)
-          .expect(201, done);
+          .then(res => {
+            const [pur_id] = res.body;
+            testToken.pur = pur_id;
+            expect(res.status).toBe(201);
+            done();
+          });
+        // .expect("Content-Type", /json/)
+        // .expect(201, done);
       });
     });
 
@@ -84,6 +90,51 @@ module.exports = () =>
             const b = Object.getPrototypeOf(res.body);
             expect(a === b).toBe(true);
           });
+      });
+    });
+
+    describe("PUT /api/pickupRequest/:id", function() {
+      it("should return an 401 when Unauthorized and updating a pickupRequest", done => {
+        return request(server)
+          .put(`/api/pickupRequest/id/${testToken.pur}`)
+          .set("Accept", "application/json")
+          .send({
+            type: `mixed bag; sell by ${Date.now()}`,
+            amount: "12",
+            preferredPickupTime: Date.now(),
+            business_id: 1
+          })
+          .expect("Content-Type", /json/)
+          .expect(401, done);
+      });
+    });
+
+    describe("PUT /api/pickupRequest/:id", function() {
+      it("should return an 200 when successfully updating a pickupRequest", done => {
+        return request(server)
+          .put(`/api/pickupRequest/${testToken.pur}`)
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({ amount: "13" })
+          .expect("Content-Type", /json/)
+          .expect(200, done);
+      });
+    });
+
+    describe("DELETE /api/pickupRequest/:id", function() {
+      it("should return an 401 when Unauthorized delete pickupRequest", done => {
+        return request(server)
+          .delete(`/api/pickupRequest/${testToken.pur}`)
+          .expect(401, done);
+      });
+    });
+
+    describe("DELETE /api/pickupRequest/:id", function() {
+      it("should return an 200 when Authorized delete pickupRequest", done => {
+        return request(server)
+          .delete(`/api/pickupRequest/${testToken.pur}`)
+          .set("Authorization", testToken.tokens[0])
+          .expect(200, done);
       });
     });
   });

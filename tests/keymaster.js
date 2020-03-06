@@ -17,8 +17,9 @@ var KeyRing = (function() {
       title: "I am the key master",
       tokens: [],
       username: "",
-      biz: undefined,
-      vol: undefined
+      biz: 0,
+      vol: 0,
+      pur: 0
     });
     return object;
   }
