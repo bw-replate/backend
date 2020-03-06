@@ -17,9 +17,11 @@ var KeyRing = (function() {
       title: "I am the key master",
       tokens: [],
       username: "",
+      access: "",
       biz: 0,
       vol: 0,
-      pur: 0
+      pur: 0,
+      acc: 0
     });
     return object;
   }
