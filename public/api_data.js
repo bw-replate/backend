@@ -1,9 +1,9 @@
 define({ "api": [
   {
-    "type": "delete",
+    "type": "post",
     "url": "/access/:id",
-    "title": "Delete a single access profile",
-    "name": "DeleteAccess",
+    "title": "Create access profile",
+    "name": "CreateAccess",
     "group": "Access",
     "parameter": {
       "examples": [
@@ -17,7 +17,7 @@ define({ "api": [
     "error": {
       "examples": [
         {
-          "title": "Delete error",
+          "title": "Create error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
