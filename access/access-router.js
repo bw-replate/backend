@@ -48,6 +48,17 @@ router.delete("/:id", (req, res) => {
   });
 });
 
+/**
+ * @api {put} /access/:id Update a single access profile
+ * @apiName UpdateAccess
+ * @apiGroup Access
+ * @apiParam {Object} updates
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * @apiErrorExample {json} error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+
 router.put("/:id", (req, res) => {
   access.findById(req.params.id).then(acc => {
     // console.log(acc);
