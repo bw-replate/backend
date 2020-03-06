@@ -5,7 +5,9 @@ module.exports = {
   add,
   find,
   findBy,
-  findById
+  findById,
+  updateById,
+  remove
 };
 
 function add(access) {
@@ -18,10 +20,22 @@ function findById(id) {
     .first();
 }
 
+function remove(id) {
+  return db("access")
+    .del()
+    .where({ id });
+}
+
 function findBy(filter) {
   return db("access").where(filter);
 }
 
 function find() {
   return db("access");
+}
+
+function updateById(updates, id) {
+  return db("access")
+    .update(updates)
+    .where({ id });
 }
