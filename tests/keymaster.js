@@ -18,7 +18,8 @@ var KeyRing = (function() {
       tokens: [],
       username: "",
       biz: 0,
-      vol: 0
+      vol: 0,
+      pur: 0
     });
     return object;
   }
