@@ -19,8 +19,8 @@ router.get("/", (req, res) => {
 });
 
 /**
- * @api {delete} /access/:id Delete a single access profile
- * @apiName DeleteAccess
+ * @api {post} /access/:id Create access profile
+ * @apiName CreateAccess
  * @apiGroup Access
  * @apiParamExample {json} Body
  * {
@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
  *   "description": "sure looked strange to me",
  *   "permissions": "none"
  * }
- * @apiErrorExample {json} Delete error
+ * @apiErrorExample {json} Create error
  *    HTTP/1.1 500 Internal Server Error
  */
 
