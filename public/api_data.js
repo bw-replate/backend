@@ -1,15 +1,49 @@
 define({ "api": [
   {
     "type": "post",
-    "url": "/access/:id",
+    "url": "/access",
     "title": "Create access profile",
     "name": "CreateAccess",
     "group": "Access",
     "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "role",
+            "description": "<p>access role</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>description of role</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "permissions",
+            "description": "<p>any special permissions or restrictions</p>"
+          }
+        ]
+      },
       "examples": [
         {
           "title": "Body",
-          "content": "{\n  \"id\": 1234,\n  \"role\": \"one eye one horn flying purple people eater\",\n  \"description\": \"sure looked strange to me\",\n  \"permissions\": \"none\"\n}",
+          "content": "{\n  \"role\": \"one eye one horn flying purple people eater\",\n  \"description\": \"sure looked strange to me\",\n  \"permissions\": \"none\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 201\n[\n 6\n]",
           "type": "json"
         }
       ]
@@ -17,7 +51,7 @@ define({ "api": [
     "error": {
       "examples": [
         {
-          "title": "Create error",
+          "title": "Registration error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }

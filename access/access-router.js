@@ -19,17 +19,24 @@ router.get("/", (req, res) => {
 });
 
 /**
- * @api {post} /access/:id Create access profile
+ * @api {post} /access Create access profile
  * @apiName CreateAccess
  * @apiGroup Access
+ * @apiParam {String} role access role
+ * @apiParam {String} description description of role
+ * @apiParam {String} permissions any special permissions or restrictions
  * @apiParamExample {json} Body
  * {
- *   "id": 1234,
  *   "role": "one eye one horn flying purple people eater",
  *   "description": "sure looked strange to me",
  *   "permissions": "none"
  * }
- * @apiErrorExample {json} Create error
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 201
+ * [
+ *  6
+ * ]
+ * @apiErrorExample {json} Registration error
  *    HTTP/1.1 500 Internal Server Error
  */
 
