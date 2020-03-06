@@ -1,12 +1,37 @@
 const router = require("express").Router();
 const access = require("./access-model");
 
+/**
+ * @api {get} /access get access profiles
+ * @apiName GetAccess
+ * @apiGroup Access
+ * @apiSuccessExample {json} Success
+ * HTTP/1.1 200
+ * @apiErrorExample {json} error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+
 router.get("/", (req, res) => {
   access
     .find()
     .then(lst => res.status(200).send(lst))
     .catch(error => res.status(500).send(error));
 });
+
+/**
+ * @api {delete} /access/:id Delete a single access profile
+ * @apiName DeleteAccess
+ * @apiGroup Access
+ * @apiParamExample {json} Body
+ * {
+ *   "id": 1234,
+ *   "role": "one eye one horn flying purple people eater",
+ *   "description": "sure looked strange to me",
+ *   "permissions": "none"
+ * }
+ * @apiErrorExample {json} Delete error
+ *    HTTP/1.1 500 Internal Server Error
+ */
 
 router.post("/", (req, res) => {
   const { role, description, permissions } = req.body;

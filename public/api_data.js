@@ -6,6 +6,34 @@ define({ "api": [
     "name": "DeleteAccess",
     "group": "Access",
     "parameter": {
+      "examples": [
+        {
+          "title": "Body",
+          "content": "{\n  \"id\": 1234,\n  \"role\": \"one eye one horn flying purple people eater\",\n  \"description\": \"sure looked strange to me\",\n  \"permissions\": \"none\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Delete error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./access/access-router.js",
+    "groupTitle": "Access"
+  },
+  {
+    "type": "delete",
+    "url": "/access/:id",
+    "title": "Delete a single access profile",
+    "name": "DeleteAccess",
+    "group": "Access",
+    "parameter": {
       "fields": {
         "Parameter": [
           {
@@ -31,6 +59,34 @@ define({ "api": [
       "examples": [
         {
           "title": "Delete error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./access/access-router.js",
+    "groupTitle": "Access"
+  },
+  {
+    "type": "get",
+    "url": "/access",
+    "title": "get access profiles",
+    "name": "GetAccess",
+    "group": "Access",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "HTTP/1.1 200",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "error",
           "content": "HTTP/1.1 500 Internal Server Error",
           "type": "json"
         }
