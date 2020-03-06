@@ -38,7 +38,7 @@ function updateByName(access_id, username) {
 }
 
 function updateById(updates, volunteer_id) {
-  console.log(updates);
+  // console.log(updates);
   return db("volunteer")
     .update(updates)
     .where({ id: volunteer_id });

@@ -86,6 +86,40 @@ module.exports = () =>
       });
     });
 
+    describe("PUT /api/volunteer/id/:id", function() {
+      it("should return an 401 when Unauthorized to update volunteer profile", done => {
+        return (
+          request(server)
+            .put(`/api/volunteer/id/${testToken.vol}`)
+            // .set("Authorization", testToken.tokens[0])
+            .set("Accept", "application/json")
+            .send({
+              access_id: 2
+            })
+            .then(res => {
+              expect(res.status).toBe(401);
+            })
+            .then(done())
+        );
+      });
+    });
+
+    describe("PUT /api/volunteer/id/:id", function() {
+      it("should return an 200 when Unauthorized to update volunteer profile", done => {
+        return request(server)
+          .put(`/api/volunteer/id/${testToken.vol}`)
+          .set("Authorization", testToken.tokens[0])
+          .set("Accept", "application/json")
+          .send({
+            access_id: 2
+          })
+          .then(res => {
+            expect(res.status).toBe(200);
+          })
+          .then(done());
+      });
+    });
+
     describe("DELETE /api/volunteer/id/:id", function() {
       it("should return 401 without authorized token when trying to DELETE a volunteer profile", done => {
         return request(server)
