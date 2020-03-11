@@ -4,6 +4,7 @@ const db = require("../database/connection.js");
 module.exports = {
   add,
   find,
+  find2,
   findBy,
   findById,
   updateById,
@@ -32,6 +33,22 @@ function findBy(filter) {
 
 function find() {
   return db("pickupRequest");
+}
+
+function find2() {
+  // resolve buisness.name from business_id
+  return db
+    .select(
+      "pickupRequest.id as id",
+      "pickupRequest.type as type",
+      "pickupRequest.amount as amount",
+      "pickupRequest.preferredPickupTime as preferredPickupTime",
+      "pickupRequest.volunteer_id as v_id",
+      "pickupRequest.status as status",
+      "business.name as business"
+    )
+    .from("pickupRequest")
+    .innerJoin("business", "business_id", "business.id");
 }
 
 function updateById(updates, id) {
