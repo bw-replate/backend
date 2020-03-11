@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const pickupRequest = require("./pickupRequest-model");
-
+const users = require("../api/api-model");
 /**
  * @api {get} /pickupRequest Get a list of Pickup Requests
  * @apiName GetPickupRequests
@@ -34,6 +34,49 @@ router.get("/", (req, res) => {
   pickupRequest
     .find()
     .then(pur => res.status(200).json(pur))
+    .catch(error => res.status(500).json({ error }));
+});
+
+/**
+ * @api {get} /pickupRequest/resolve Get a list of Pickup Requests (resolving names from ids)
+ * @apiName GetPickupRequestsResolve
+ * @apiGroup pickupRequests
+ * @apiSuccessExample {json} Success
+ * [
+ *  {
+ *    "id": 2,
+ *    "type": "cheeses",
+ *    "amount": "1lb",
+ *    "preferredPickupTime": "2020-03-01T20:19:02.371Z",
+ *    "volunteer": "",
+ *    "status": "pending",
+ *    "business": "Stay fresh market"
+ *  },
+ * ...
+ * ]
+ * @apiErrorExample {json} Error
+ *    HTTP/1.1 500 Internal Server Error
+ */
+
+router.get("/resolve", (req, res) => {
+  function resolveNames(pickupRequests) {
+    return pickupRequests.map(
+      ({ id, type, amount, preferredPickupTime, v_id, status, business }) => {
+        return {
+          id,
+          type,
+          amount,
+          preferredPickupTime,
+          volunteer: v_id ? users.findBy({ id: v_id }) : "",
+          status,
+          business
+        };
+      }
+    );
+  }
+  pickupRequest
+    .find2()
+    .then(pur => res.status(200).json(resolveNames(pur)))
     .catch(error => res.status(500).json({ error }));
 });
 

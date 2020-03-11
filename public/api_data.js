@@ -981,6 +981,34 @@ define({ "api": [
     "groupTitle": "pickupRequests"
   },
   {
+    "type": "get",
+    "url": "/pickupRequest/resolve",
+    "title": "Get a list of Pickup Requests (resolving names from ids)",
+    "name": "GetPickupRequestsResolve",
+    "group": "pickupRequests",
+    "success": {
+      "examples": [
+        {
+          "title": "Success",
+          "content": "[\n {\n   \"id\": 2,\n   \"type\": \"cheeses\",\n   \"amount\": \"1lb\",\n   \"preferredPickupTime\": \"2020-03-01T20:19:02.371Z\",\n   \"volunteer\": \"\",\n   \"status\": \"pending\",\n   \"business\": \"Stay fresh market\"\n },\n...\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "examples": [
+        {
+          "title": "Error",
+          "content": "HTTP/1.1 500 Internal Server Error",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./pickupRequest/pickupRequest-router.js",
+    "groupTitle": "pickupRequests"
+  },
+  {
     "type": "put",
     "url": "/pickupRequest/:id",
     "title": "Update a single Pickup Request",
